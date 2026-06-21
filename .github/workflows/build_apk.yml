@@ -1,4 +1,4 @@
-name: Testar Build Padrao do Flutter
+name: Executar Compilacao Final
 
 on:
   push:
@@ -13,19 +13,19 @@ jobs:
     - name: 1. Baixar o codigo nativo do projeto
       uses: actions/checkout@v4
 
-    - name: 2. Configurar Java Padrao do Mercado
+    - name: 2. Configurar Java
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: 3. Configurar Flutter Atualizado
+    - name: 3. Configurar Flutter
       uses: subosito/flutter-action@v2
       with:
         channel: 'stable'
 
-    - name: 4. Instalar as dependencias padrao do seu pubspec
+    - name: 4. Instalar as dependencias
       run: flutter pub get
 
-    - name: 5. Rodar a compilacao automatica do projeto
+    - name: 5. Rodar a compilacao
       run: flutter build apk --release
