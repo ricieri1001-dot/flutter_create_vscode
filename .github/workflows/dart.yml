@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: 1. Baixar o codigo nativo do projeto
       uses: actions/checkout@v4
@@ -23,7 +22,7 @@ jobs:
     - name: 3. Configurar Flutter Atualizado
       uses: subosito/flutter-action@v2
       with:
-        channel: 'stable' # Ele vai usar a versão estável mais recente do Flutter automaticamente
+        channel: 'stable'
 
     - name: 4. Instalar as dependencias padrao do seu pubspec
       run: flutter pub get
