@@ -1,121 +1,113 @@
 import 'package:flutter/material.dart';
+import 'menu_principal/painel_principal_page.dart';
+import 'mixer/mixer_page.dart';
+import 'repertorio/lista_repertorio_page.dart'; // Importação corrigida
+import 'ferramentas/ferramentas_page.dart';
+import 'perfil/perfil_page.dart'; 
 
-void main() {
-  runApp(const MyApp());
+void main() => runApp(const CentralDoMusicoApp());
+
+// ==========================================
+// PALETA DE CORES (Premium e Fiel ao Design)
+// ==========================================
+class AppColors {
+  static const Color background = Color(0xFF070B11);
+  static const Color surface = Color(0xFF0E1622);
+  static const Color cardBg = Color(0xFF131D2C);
+  static const Color primary = Color(0xFFE5A93C);
+  static const Color textCifra = Color(0xFF74E9A7);
+
+  static const Color faderVoz = Colors.purpleAccent;
+  static const Color faderViolao = Colors.orangeAccent;
+  static const Color faderCavaco = Colors.yellowAccent;
+  static const Color faderBaixo = Colors.blueAccent;
+  static const Color faderPercussao = Colors.greenAccent;
+  static const Color faderBateria = Colors.redAccent;
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+// ==========================================
+// MODELOS DE DADOS CORE
+// ==========================================
+class Musica {
+  final String id;
+  final String titulo;
+  final String artista;
+  final String cifra;
 
-  // This widget is the root of your application.
+  const Musica({
+    required this.id,
+    required this.titulo,
+    required this.artista,
+    required this.cifra,
+  });
+}
+
+// ==========================================
+// CONFIGURAÇÃO CORE DO APLICATIVO
+// ==========================================
+class CentralDoMusicoApp extends StatelessWidget {
+  const CentralDoMusicoApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+      title: 'Central do Músico Pro',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: AppColors.background,
+        primaryColor: AppColors.primary,
+        colorScheme: const ColorScheme.dark(
+          primary: AppColors.primary,
+          surface: AppColors.surface,
+        ),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const BaseNavigationWindow(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+// ==========================================
+// CRONOGRAMA DE NAVEGAÇÃO (Espinha Dorsal)
+// ==========================================
+class BaseNavigationWindow extends StatefulWidget {
+  const BaseNavigationWindow({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<BaseNavigationWindow> createState() => _BaseNavigationWindowState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _BaseNavigationWindowState extends State<BaseNavigationWindow> {
+  int _currentTab = 0; 
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  // A lista foi atualizada para chamar o ListaRepertorioPage na posição 1
+  final List<Widget> _paginas = [
+    const PainelPrincipalPage(), 
+    ListaRepertorioPage(),         // <--- Lista carregada aqui
+    const MixerPage(),
+    const FerramentasPage(),
+    const Center(child: Text("Perfil do Músico - Em breve na pasta /perfil/")),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: .center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      body: IndexedStack(index: _currentTab, children: _paginas),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentTab,
+        onTap: (index) => setState(() => _currentTab = index),
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: const Color(0xFF0A0F18),
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: Colors.grey,
+        selectedFontSize: 11,
+        unselectedFontSize: 11,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home), label: 'Início'),
+          BottomNavigationBarItem(icon: Icon(Icons.queue_music), label: 'Repertório'),
+          BottomNavigationBarItem(icon: Icon(Icons.tune), label: 'Mixer'),
+          BottomNavigationBarItem(icon: Icon(Icons.build_circle_outlined), label: 'Ferramentas'),
+          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Perfil'),
+        ],
       ),
     );
   }

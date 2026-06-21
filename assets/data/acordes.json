@@ -1,0 +1,19 @@
+{
+  "Violão": {
+    "C": [
+      {"tipo": "Maior", "posicao": "x-3-2-0-1-0", "dedilhado": "x-3-2-0-1-0"},
+      {"tipo": "Maj7", "posicao": "x-3-2-0-0-0", "dedilhado": "x-3-2-0-0-0"}
+    ],
+    "D": [
+      {"tipo": "Maior", "posicao": "x-x-0-2-3-2", "dedilhado": "x-x-0-2-3-2"}
+    ]
+  },
+  "Cavaco": {
+    "C": [
+      {"tipo": "Maior", "posicao": "0-0-0-3", "dedilhado": "0-0-0-3"}
+    ],
+    "G": [
+      {"tipo": "Maior", "posicao": "0-2-1-2", "dedilhado": "0-2-1-2"}
+    ]
+  }
+}
