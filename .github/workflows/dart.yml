@@ -1,4 +1,4 @@
-name: Compilar Sandbox Flutter
+name: Testar Build Padrao do Flutter
 
 on:
   push:
@@ -11,29 +11,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 1. Baixar o código do repositório
-      uses: actions/checkout@v3
+    - name: 1. Baixar o codigo nativo do projeto
+      uses: actions/checkout@v4
 
-    - name: 2. Configurar o Java (JDK 17 para Gradle moderno)
-      uses: actions/setup-java@v3
+    - name: 2. Configurar Java Padrao do Mercado
+      uses: actions/setup-java@v4
       with:
-        distribution: 'zulu'
+        distribution: 'temurin'
         java-version: '17'
 
-    - name: 3. Configurar o Flutter Framework
+    - name: 3. Configurar Flutter Atualizado
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.19.x'
-        channel: 'stable'
+        channel: 'stable' # Ele vai usar a versão estável mais recente do Flutter automaticamente
 
-    - name: 4. Atualizar os pacotes do pubspec
+    - name: 4. Instalar as dependencias padrao do seu pubspec
       run: flutter pub get
 
-    - name: 5. Compilar o APK e testar build.gradle
+    - name: 5. Rodar a compilacao automatica do projeto
       run: flutter build apk --release
-
-    - name: 6. Disponibilizar o APK gerado
-      uses: actions/upload-artifact@v3
-      with:
-        name: Sandbox-APK
-        path: build/app/outputs/flutter-apk/app-release.apk
