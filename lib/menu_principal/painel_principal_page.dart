@@ -37,7 +37,7 @@ class _PainelPrincipalPageState extends State<PainelPrincipalPage> {
                           const Text(
                             "CENTRAL\nDO MÚSICO", 
                             style: TextStyle(
-                              fontWeight: FontWeight.black, 
+                              fontWeight: FontWeight.w900, 
                               fontSize: 16, 
                               height: 1.1, 
                               letterSpacing: 0.5
@@ -165,7 +165,7 @@ class _PainelPrincipalPageState extends State<PainelPrincipalPage> {
                     const SizedBox(height: 8),
                     const Text(
                       "Nenhuma pista carregada no painel de mixagem.",
-                      style: TextStyle(fontSize: 12, color: Colors.grey, style: FontStyle.italic),
+                      style: TextStyle(fontSize: 12, color: Colors.grey, fontStyle: FontStyle.italic),
                     ),
                   ],
                 ),
