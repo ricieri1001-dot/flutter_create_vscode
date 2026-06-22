@@ -1,0 +1,10 @@
+[
+  {
+    "id": "doi_demais",
+    "titulo": "Dói Demais",
+    "artista": "Chitãozinho & Xororó",
+    "tom": "E",
+    "caminhoTxt": "assets/cifras/Doi_Demais.txt",
+    "bpm": 120
+  }
+]
